@@ -75,7 +75,7 @@ end
 NotifyOnNewObject("/Script/Astro.AstroCharacterMovementComponent", function(self)
     if #options.presets > 0 then
         ExecuteWithDelay(1000, function()
-            setCustomValues(self, options.presets[1])
+            setCustomValues(self, options.presets[PresetIndex])
         end)
     end
 end)
@@ -84,14 +84,15 @@ do
     local movementComponents = FindAllOf("AstroCharacterMovementComponent") ---@type UAstroCharacterMovementComponent[]?
     if movementComponents then
         for _, comp in ipairs(movementComponents) do
-            setCustomValues(comp, options.presets[1])
+            setCustomValues(comp, options.presets[PresetIndex])
         end
     end
 end
 
-local AAstroCharacter = UEHelpers.GetPlayer() ---@cast AAstroCharacter ADesignAstro_C
 RegisterKeyBind(Key.SPACE, { ModifierKey.CONTROL }, function()
+    local AAstroCharacter = UEHelpers.GetPlayer() ---@cast AAstroCharacter ADesignAstro_C
     local index = PresetIndex + 1
+
     if #options.presets < index then
         PresetIndex = 1
     else
