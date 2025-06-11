@@ -1,6 +1,6 @@
 local UEHelpers = require("UEHelpers")
 
-local currentModDirectory = debug.getinfo(1, "S").source:match("@?(.+)\\[Ss]cripts\\")
+local currentModDirectory = debug.getinfo(1, "S").source:gsub("\\", "/"):match("@?(.+)/[Ss]cripts/")
 _G.CurrentModDirectory = currentModDirectory
 
 local format = string.format
